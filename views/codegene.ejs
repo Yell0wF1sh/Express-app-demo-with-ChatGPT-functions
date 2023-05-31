@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Code Generator
+    </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    <h1>
+        Code Generator
+    </h1>
+    <p class="lead">Help generate a code for you!</p>
+    <form method="post"  action="/codeGenerator">
+        <label for="codeLanguage">Select code language:</label>
+        <select name="codeLanguage" id="codeLanguage">
+            <option value="javascript">JavaScript</option>
+            <option value="python">Python</option>
+            <option value="java">Java</option>
+        </select><br><br>
+        <label for="codeContent">Enter code content:</label><br>
+        <textarea name="codeContent" id="codeContent" cols="30" rows="10"></textarea><br><br>
+        <input type="submit" value="Generate code">
+    </form>
+</body>
+
+</html>

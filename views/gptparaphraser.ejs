@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        GPT Paraphraser
+    </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    <h1>
+        Paraphraser
+    </h1>
+    <% if (originalText==undefined || paraphraseText==undefined || keywords==undefined) { %>
+        <p class="lead">Summarize text in the way you want! </p>
+        <form method="post" action="/gpt/paraphraser" onsubmit="document.getElementById('loading').hidden = false">
+            <div class="mb-3">
+                <label for="promptInput" class="form-label">Text</label>
+                <textarea class="form-control" id="promptInput" rows="5" aria-describedby="promptHelp"
+                    name="promptText"></textarea>
+                <div id="promptHelp" class="form-text">Text shouldn't exceed 2000 words</div>
+            </div>
+            <div class="mb-3">
+                <input class="form-check-input" type="checkbox"
+                    onchange="document.getElementById('wordCountInput').disabled = !this.checked;"><label
+                    for="wordCountInput" class="form-label">Word count</label>
+                <input type="number" class="form-control" id="wordCountInput" aria-describedby="wordCountHelp"
+                    name="wordCount" disabled>
+                <div id="wordCountHelp" class="form-text">
+                    The desired word count for the summary (Default is around 150 words)
+                </div>
+            </div>
+            <div class="mb-3">
+                <input class="form-check-input" type="checkbox"
+                    onchange="document.getElementById('keywordCountSelect').disabled = !this.checked;"><label
+                    for="keywordCountSelect" class="form-label">Keywords:</label>
+                <select class="form-select form-select-sm" aria-label=".form-select-sm example" id="keywordCountSelect"
+                    aria-describedby="keywordCountSelectHelp" name="keywordCount" disabled>
+                    <option selected>default</option>
+                    <% let n=1 %>
+                        <% while (n <=10) { %>
+                            <option>
+                                <%= n%>
+                            </option>
+                            <% n +=1 %>
+                                <% } %>
+                </select>
+                <div id="keywordCountSelectHelp" class="form-text">
+                    The desired keywords generated for the summary (Default is 5 words)
+                </div>
+            </div>
+            <div class="spinner-border text-primary" role="status" id="loading" hidden>
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <% } else { %>
+
+            <div class="accordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="originalText">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseOriginalText" aria-expanded="false"
+                            aria-controls="collapseOriginalText">
+                            <strong>Original Text</strong>
+                        </button>
+                    </h2>
+                    <div id="collapseOriginalText" class="accordion-collapse collapse" aria-labelledby="originalText">
+                        <div class="accordion-body">
+                            <%= originalText %>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="summarizedText">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseSummarizedText" aria-expanded="true"
+                            aria-controls="collapseSummarizedText">
+                            <strong>Summarize Text</strong>
+                        </button>
+                    </h2>
+                    <div id="collapseSummarizedText" class="accordion-collapse collapse show"
+                        aria-labelledby="summarizedText">
+                        <div class="accordion-body">
+                            <%= paraphraseText %>
+                        </div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="keywords">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#collapseKeywords" aria-expanded="true" aria-controls="collapseKeywords">
+                            <strong>Keywords</strong>
+                        </button>
+                    </h2>
+                    <div id="collapseKeywords" class="accordion-collapse collapse show" aria-labelledby="keywords">
+                        <div class="accordion-body">
+                            <%= keywords %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <p class="lead" style="margin-top: 20px;">Summarize another text! </p>
+            <form method="post" action="/gpt/paraphraser" onsubmit="document.getElementById('loading').hidden = false">
+                <div class="mb-3">
+                    <label for="promptInput" class="form-label">Text</label>
+                    <textarea class="form-control" id="promptInput" rows="5" aria-describedby="promptHelp"
+                        name="promptText"></textarea>
+                    <div id="promptHelp" class="form-text">Text shouldn't exceed 2000 words</div>
+                </div>
+                <div class="mb-3">
+                    <input class="form-check-input" type="checkbox"
+                        onchange="document.getElementById('wordCountInput').disabled = !this.checked;"><label
+                        for="wordCountInput" class="form-label">Word count</label>
+                    <input type="number" class="form-control" id="wordCountInput" aria-describedby="wordCountHelp"
+                        name="wordCount" disabled>
+                    <div id="wordCountHelp" class="form-text">
+                        The desired word count for the summary (Default is around 150 words)
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <input class="form-check-input" type="checkbox"
+                        onchange="document.getElementById('keywordCountSelect').disabled = !this.checked;"><label
+                        for="keywordCountSelect" class="form-label">Keywords:</label>
+                    <select class="form-select form-select-sm" aria-label=".form-select-sm example"
+                        id="keywordCountSelect" aria-describedby="keywordCountSelectHelp" name="keywordCount" disabled>
+                        <option selected>default</option>
+                        <% let n=1 %>
+                            <% while (n <=10) { %>
+                                <option>
+                                    <%= n%>
+                                </option>
+                                <% n +=1 %>
+                                    <% } %>
+                    </select>
+                    <div id="keywordCountSelectHelp" class="form-text">
+                        The desired keywords generated for the summary (Default is 5 words)
+                    </div>
+                </div>
+                <div class="spinner-border text-primary" role="status" id="loading" hidden>
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+            <% } %>
+</body>
+
+</html>

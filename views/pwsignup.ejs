@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Login
+    </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    <div class="login">
+        <h2>Signup</h2>
+        <form method="post" action="/signup" class="login_signup_form">
+            username: <br><input type="username" autocomplete="username" name="username"><br>
+            password:<br>
+            <input type="password" autocomplete="passphrase" name="passphrase"><br>
+            confirm password:<br>
+            <input type="password" name="passphrase2"><br>
+
+            age: <br><input type="number" name="age"><br>
+
+
+            <input type="submit" style="background-color: black; color: white;">
+        </form>
+        <div style="text-align:center;font-size: 20px;">
+            OR
+        </div>
+        <div>
+            <a class="navButton" href="/login">Login</a>
+        </div>
+        <div>
+            <a class="navButton" href="/">Back To Home</a>
+        </div>
+</body>
+
+</html>

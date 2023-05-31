@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        GPT History
+    </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    <h1>
+        History for <%= locals.username %>
+    </h1>
+    <% if (items.length==0) { %>
+        <p>No history for this user yet</p>
+        <% } else { %>
+            <ul>
+                <li><a href="/gpt/history/clear">Clear history</a></li>
+                <li><a href="/gpt/history/sortByDate">Sort by date</a></li>
+            </ul>
+            <table class="table table-bordered table-striped">
+                <tr>
+                    <th>Prompt</th>
+                    <th>Answer</th>
+                    <th>Date</th>
+                </tr>
+                <% items.forEach(item=> { %>
+                    <tr>
+                        <td>
+                            <%= item.prompt %>
+                        </td>
+                        <td>
+                            <%= item.answer %>
+                        </td>
+                        <td>
+                            <%= item.createdAt %>
+                        </td>
+                    </tr>
+                    <% }) %>
+            </table>
+            <%}%>
+</body>
+
+</html>

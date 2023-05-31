@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Poetry Generator
+    </title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+    <h1>
+        Poetry Generator
+    </h1>
+    <p class="lead">Help write a poem for you!</p>
+    <form method="post" action="/poetry" onsubmit="document.getElementById('loading').hidden = false">
+        <div class="mb-3">
+            <label for="style">Select a style:</label>
+            <select name="style" id="style">
+                <option value="">Select an option</option>
+                <option value="acrostic">Acrostic</option>
+                <option value="ballad">Ballad</option>
+                <option value="concrete">Concrete</option>
+                <option value="clerihew">Clerihew</option>
+                <option value="elegy">Elegy</option>
+                <option value="epic">Epic</option>
+                <option value="ekphrastic">Ekphrastic</option>
+                <option value="epigram">Epigram</option>
+                <option value="found">Found</option>
+                <option value="free-verse">Free verse</option>
+                <option value="ghazal">Ghazal</option>
+                <option value="haiku">Haiku</option>
+                <option value="limerick">Limerick</option>
+                <option value="ode">Ode</option>
+                <option value="pastoral">Pastoral</option>
+                <option value="pantoum">Pantoum</option>
+                <option value="romantic">Romantic</option>
+                <option value="sad">Sad</option>
+                <option value="sestina">Sestina</option>
+                <option value="sonnet">Sonnet</option>
+                <option value="terza-rima">Terza rima</option>
+                <option value="triolet">Triolet</option>
+                <option value="villanelle">Villanelle</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="theme">Select a theme:</label>
+            <select name="theme" id="theme">
+                <option value="">Select an option</option>
+                <option value="love">Love</option>
+                <option value="nature">Nature</option>
+                <option value="death">Death</option>
+                <option value="hope">Hope</option>
+                <option value="dreams">Dreams</option>
+                <option value="freedom">Freedom</option>
+                <option value="faith">Faith</option>
+                <option value="friendship">Friendship</option>
+                <option value="family">Family</option>
+                <option value="war">War</option>
+                <option value="peace">Peace</option>
+                <option value="religion">Religion</option>
+                <option value="politics">Politics</option>
+                <option value="history">History</option>
+                <option value="science">Science</option>
+                <option value="technology">Technology</option>
+                <option value="philosophy">Philosophy</option>
+                <option value="education">Education</option>
+                <option value="work">Work</option>
+                <option value="sports">Sports</option>
+                <option value="music">Music</option>
+                <option value="art">Art</option>
+                <option value="literature">Literature</option>
+                <option value="food">Food</option>
+                <option value="travel">Travel</option>
+                <option value="animals">Animals</option>
+                <option value="holidays">Holidays</option>
+                <option value="seasons">Seasons</option>
+                <option value="weather">Weather</option>
+                <option value="cities">Cities</option>
+                <option value="countries">Countries</option>
+                <option value="space">Space</option>
+                <option value="time">Time</option>
+                <option value="money">Money</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="language">Language:</label>
+            <input type="text" name="language" id="language" />
+        </div>
+        <div class="spinner-border text-primary" role="status" id="loading" hidden>
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</body>
+
+</html>
