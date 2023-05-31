@@ -1,4 +1,6 @@
 const express = require('express');
+const tunnel = require('tunnel');
+const axios = require('axios');
 const router = express.Router();
 const User = require('../models/User');
 const { Configuration, OpenAIApi } = require("openai");
@@ -6,7 +8,15 @@ const GPTHistoryItem = require('../models/GPTHistoryItem');
 const configuration = new Configuration({
     apiKey: process.env.OPENAI_API_KEY,
 });
-const openai = new OpenAIApi(configuration);
+const client = axios.create({
+    httpsAgent: tunnel.httpsOverHttp({
+        proxy: {
+            host: '127.0.0.1',
+            port: 7890,
+        }
+    })
+});
+const openai = new OpenAIApi(configuration, configuration.basePath, client)
 
 isLoggedIn = (req, res, next) => {
     if (res.locals.loggedIn) {
