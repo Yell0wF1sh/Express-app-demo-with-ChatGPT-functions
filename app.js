@@ -7,7 +7,6 @@ const layouts = require("express-ejs-layouts");
 const pw_auth_router = require('./routes/pwauth')
 const gptRouter = require('./routes/gpt')
 const poetry_router = require('./routes/poetry')
-const code_router = require('./routes/codeGenerator')
 
 const User = require('./models/User');
 
@@ -67,10 +66,7 @@ app.use(session({
   cookie: {
     maxAge: 1000 * 60 * 60 * 24 * 7 // 1 week                                        
   },
-  store: store,
-  // Boilerplate options, see:                                                       
-  // * https://www.npmjs.com/package/express-session#resave                          
-  // * https://www.npmjs.com/package/express-session#saveuninitialized               
+  store: store,             
   resave: true,
   saveUninitialized: true
 }));
@@ -99,7 +95,6 @@ app.get('/', (req, res, next) => {
 
 app.use(gptRouter)
 app.use(poetry_router)
-app.use(code_router)
 app.get('/about',
   isLoggedIn,
   (req, res, next) => {
@@ -107,10 +102,10 @@ app.get('/about',
   }
 )
 
-app.get('/team',
+app.get('/author',
   isLoggedIn,
   (req, res, next) => {
-    res.render('team');
+    res.render('author');
   }
 )
 
